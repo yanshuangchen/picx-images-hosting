@@ -6,4 +6,6 @@
 PicX is completely open source, and you can use it for free.
 
 If you like it, please give it a star on [GitHub](https://github.com/XPoet/picx).
+
+图床
         
