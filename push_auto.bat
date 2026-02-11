@@ -29,24 +29,24 @@ set "COMMIT_MSG=%COMMIT_PREFIX% %DATETIME%"
 echo Using commit message: %COMMIT_MSG%
 echo.
 
-echo ===== 1. git pull --rebase =====
-git pull --rebase
-if errorlevel 1 (
-    echo [ERROR] git pull --rebase failed. Resolve conflicts and retry.
-    goto done
-)
-echo.
-
-echo ===== 2. git add -A =====
+echo ===== 1. git add -A =====
 git add -A
 echo.
 
-echo ===== 3. git commit (if changes) =====
+echo ===== 2. git commit (if changes) =====
 git diff --cached --quiet
 if errorlevel 1 (
     git commit -m "%COMMIT_MSG%"
 ) else (
     echo [INFO] No changes to commit.
+)
+echo.
+
+echo ===== 3. git pull --rebase (auto-stash) =====
+git pull --rebase --autostash
+if errorlevel 1 (
+    echo [ERROR] git pull --rebase failed. Resolve conflicts and retry.
+    goto done
 )
 echo.
 
